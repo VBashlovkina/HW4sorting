@@ -6,7 +6,7 @@ public class RadixSorter {
      * Get the max number of digits used in the ints from given array
      * 
      * @param input
-     * @return
+     * @return the number of digits of the maximum value in input
      */
     private static int maxDigits(int[] input) {
 	if (input.length <= 0) {
@@ -27,15 +27,17 @@ public class RadixSorter {
 	return (num / (int) Math.pow(10, digitPlace)) % 10;
 	// return (new Integer(num).toString().charAt());
     }
-
+/**
+ * sorts the input so that for elements i, j, if index[i] < index[j], i < j 
+ * @param input
+ * @return input with elements re-arranged as specified
+ */
     public static int[] radixSort(int[] input) {
-	/*
-	 * How do we determine how many digits there are? Maybe we find the max
-	 * element and count digits?
-	 */
 	int k;
 	int len = input.length;
 	int maxDigit = maxDigits(input);
+	//there are 10 choices for the current digit
+	//no choice can have more numbers than the input length
 	int[][] table = new int[10][len];
 	int[] indices = new int[10];
 	
@@ -46,7 +48,7 @@ public class RadixSorter {
 		// Get the digit at current digit place
 		int dig = digitAt(input[j], digitPlace);
 		
-		// Put the digit in the appropriate column
+		// Put the number in the appropriate digit column
 		table[dig]
 			[indices[dig]] = 
 			input[j];
@@ -55,6 +57,8 @@ public class RadixSorter {
 		indices[dig]++;
 	    } // for each input number
 	    
+	    
+	    //flatten the output into one long array
 	    k = 0;
 	    
 	    for (int i = 0; i < 10; i++) {
