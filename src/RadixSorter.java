@@ -16,7 +16,7 @@ public class RadixSorter {
 	int max = input[0];
 	for (int i = 1; i < input.length; i++) {
 	    if (input[i] > max)
-		max = input[i];
+		max = input[i]; //don't both these lines do the same thing?????
 	    max = input[i] > max ? input[i] : max;
 	}
 	
