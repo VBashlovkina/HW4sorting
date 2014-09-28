@@ -1,6 +1,5 @@
 
 
-import java.util.Comparator;
 
 /**
  * Objects that know how to sort.
@@ -8,7 +7,7 @@ import java.util.Comparator;
  * @author Samuel A. Rebelsky
  * @author CSC 207 2013F
  */
-public interface Sorter<T>
+public interface Sorter
 {
   /**
    * Sort an array in place.
@@ -27,7 +26,7 @@ public interface Sorter<T>
    *    For all i, 0 < i < vals.length,
    *      order.compare(vals[i-1], vals[i]) <= 0
    */
-  public T[] sorti(T[] values, Comparator<T> order);
+  public int[] sorti(int[] values);
 
   /**
    * Sort an array out of place.
@@ -45,5 +44,5 @@ public interface Sorter<T>
    *    For all i, 0 < i < sorted.length,
    *      order.compare(sorted[i-1], sorted[i]) <= 0
    */
-  public T[] sort(T[] values, Comparator<T> order);
+  public int[] sort(int[] values);
 } // interface Sorter

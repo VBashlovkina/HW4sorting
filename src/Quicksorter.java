@@ -1,7 +1,5 @@
 
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Random;
 
 /**
@@ -10,25 +8,25 @@ import java.util.Random;
  * @author Samuel A. Rebelsky
  * @author Your Name Here.
  */
-public class Quicksorter<T>
+public class Quicksorter
     extends
-      SorterBridge<T>
+      SorterBridge
 {
   /**
-   * Sort vals using Quicksort. See the Sorter<T> interface for additional
+   * Sort vals using Quicksort. See the Sorter interface for additional
    * details.
    */
   @Override
-  public T[] sorti(T[] vals, Comparator<T> order)
+  public int[] sorti(int[] vals)
   {
-    qsort(vals, order, 0, vals.length);
+    qsort(vals, 0, vals.length);
     return vals;
-  } // sorti(T[], Comparator<T>)
+  } // sorti(int[], Comparator)
 
   /**
    * Sort the elements in positions [lb..ub) using Quicksort.
    */
-  public void qsort(T[] vals, Comparator<T> order, int lb, int ub)
+  public void qsort(int[] vals, int lb, int ub)
   {
     // One element arrays are sorted.
     if (lb >= ub - 1)
@@ -37,17 +35,17 @@ public class Quicksorter<T>
       }
     else
       {
-        int mid = partition(vals, order, lb, ub);
-        qsort(vals, order, lb, mid);
-        qsort(vals, order, mid + 1, ub);
+        int mid = partition(vals, lb, ub);
+        qsort(vals,  lb, mid);
+        qsort(vals,  mid + 1, ub);
       } // More than one element
-  } // qsort(T[], Comparator<T>, int, int)
+  } // qsort(int[], Comparator, int, int)
 
-  public int pickPivot(Comparator<T> order, int lb, int ub)
+  public int pickPivot(int lb, int ub)
   {
     Random gen = new Random();
     return lb + gen.nextInt(ub - lb);
-  }// pickPivot(Comparator<T>, int, int)
+  }// pickPivot(Comparator, int, int)
 
   /**
    * Pick a random pivot and reorganize the elements in positions [lb..ub) of
@@ -76,26 +74,26 @@ public class Quicksorter<T>
    *       pivot, and the values above the upper bound.
    * 
    */
-  int partition(T[] vals, Comparator<T> order, int lb, int ub)
+  int partition(int[] vals, int lb, int ub)
   {
     // Pick a pivot
-    int pivot = pickPivot(order, lb, ub);
+    int pivot = pickPivot(lb, ub);
     // Move the pivot to lower bound
     Utils.swap(vals, lb, pivot);
     pivot = lb;
     // Initialize movable indices
     int left = lb + 1;
     int right = ub;
-    T pVal = (vals[pivot]);
+    int pVal = (vals[pivot]);
 
     while (left < right)
       {
-        if (order.compare(vals[left], pVal) > 0) // if vals[lb] > pVal
+        if (vals[left] > pVal) // if vals[lb] > pVal
           Utils.swap(vals, --right, left);
         else
           left++;
       }// while left < right
     Utils.swap(vals, pivot, --left);
     return left;
-  } // partition(T[], Comparator, int, int)
-} // Quicksorter<T>
+  } // partition(int[], Comparator, int, int)
+} // Quicksorter

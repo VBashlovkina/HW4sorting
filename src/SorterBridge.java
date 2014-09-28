@@ -13,25 +13,25 @@ import java.util.Comparator;
  * 
  * @author Samuel A. Rebelsky
  */
-public class SorterBridge<T>
+public class SorterBridge
     implements
-      Sorter<T>
+      Sorter
 {
 
   @Override
-  public T[] sorti(T[] vals, Comparator<T> order)
+  public int[] sorti(int[] vals)
   {
     // Sort
-    T[] sorted = sort(vals, order);
+    int[] sorted = sort(vals);
     // And copy back to the original array
     System.arraycopy(sorted, 0, vals, 0, vals.length);
     // We're done
     return vals;
-  } // sorti(T[], Comparator<T>)
+  } // sorti(int[], Comparator)
 
   @Override
-  public T[] sort(T[] values, Comparator<T> order)
+  public int[] sort(int[] values)
   {
-    return sorti(values.clone(), order);
-  } // sort(T[], Comparator<T>)
-} // SorterBridge<T>
+    return sorti(values.clone());
+  } // sort(int[], Comparator)
+} // SorterBridge

@@ -8,20 +8,20 @@ import java.util.Comparator;
  * 
  * @author Samuel A. Rebelsky
  */
-public class InsertionSorter<T>
+public class InsertionSorter
     extends
-      SorterBridge<T>
+      SorterBridge
 {
   /**
    * Sort vals using insertion sort. See the Sorter<T> interface for additional
    * details.
    */
-  @Override
-  public T[] sorti(T[] vals, Comparator<T> order)
+
+  public int[] sorti(int[] vals)
   {
     for (int i = 1; i < vals.length; i++)
       {
-        insert(vals, order, i);
+        insert(vals, i);
       } // for
     return vals;
   } // sorti(T[], Comparator<T>)
@@ -43,7 +43,7 @@ public class InsertionSorter<T>
    * @post Utils.sorted(values, order, 0, n-1)
    * @post No elements have been added or removed.
    */
-  void insert(T[] vals, Comparator<T> order, int n)
+  void insert(int[] vals,  int n)
   {
     // Invariants:
     //   I1(i): Utils.sorted(values,0,i).
@@ -55,7 +55,7 @@ public class InsertionSorter<T>
     //   I2(n) holds at the beginning because that subarray is empty
     //   I3(n) holds at the beginning because the second subarray is empty
     int i = n;
-    while ((i > 0) && (order.compare(vals[i - 1], vals[i]) > 0))
+    while ((i > 0) && (vals[i - 1] > vals[i]))
       {
         Utils.swap(vals, i, i - 1);
         // Analysis:

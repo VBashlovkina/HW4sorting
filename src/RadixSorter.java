@@ -1,7 +1,13 @@
 import java.util.Arrays;
 
-public class RadixSorter {
+public class RadixSorter extends SorterBridge{
 
+    /**
+     * Constructor for dummy RadixSorter object
+     */
+    public RadixSorter()
+    {}
+    
     /**
      * Get the max number of digits used in the ints from given array
      * 
@@ -27,8 +33,8 @@ public class RadixSorter {
 	return (num / (int) Math.pow(10, digitPlace)) % 10;
 	// return (new Integer(num).toString().charAt());
     }
-
-    public static int[] radixSort(int[] input) {
+    @Override	
+    public  int[] sort(int[] input) {
 	/*
 	 * How do we determine how many digits there are? Maybe we find the max
 	 * element and count digits?
@@ -69,9 +75,9 @@ public class RadixSorter {
     public static void main(String[] args) {
 	//System.out.println("3d digit of 4635 is " + digitAt(2, 2));
 	int[] array = {14,2,3,42,586,6,79,82,9,Integer.MAX_VALUE, 0};
-
+	RadixSorter r = new RadixSorter();	
 	System.out.println(Arrays.toString(array));
-	System.out.println(Arrays.toString(radixSort(array)));
+	System.out.println(Arrays.toString(r.sort(array)));
     }
 
 }
