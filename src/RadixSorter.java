@@ -1,7 +1,17 @@
 import java.util.Arrays;
 
-public class RadixSorter {
+/*
+ * Code written by Hannah Cohn, Ty Dewey, Vasilisa Bashlovkina
+ * Some comments and documentation by Mira Hall
+ */
+public class RadixSorter extends SorterBridge{
 
+    /**
+     * Constructor for a dummy RadixSorter object
+     */
+    public RadixSorter()
+    {}
+    
     /**
      * Get the max number of digits used in the ints from given array
      * 
@@ -16,23 +26,21 @@ public class RadixSorter {
 	int max = input[0];
 	for (int i = 1; i < input.length; i++) {
 	    if (input[i] > max)
-		max = input[i]; //don't both these lines do the same thing?????
-	    max = input[i] > max ? input[i] : max;
+		max = input[i];    
 	}
-	
 	return new Integer(max).toString().length() - 1;
     }
 
     public static int digitAt(int num, int digitPlace) {
 	return (num / (int) Math.pow(10, digitPlace)) % 10;
-	// return (new Integer(num).toString().charAt());
     }
-/**
- * sorts the input so that for elements i, j, if index[i] < index[j], i < j 
- * @param input
- * @return input with elements re-arranged as specified
- */
-    public static int[] radixSort(int[] input) {
+    @Override	
+    /**
+     * sorts the input so that for elements i, j, if index[i] < index[j], i < j
+     * @param input
+     * @return input with elements re-arranged as specified
+     */
+    public int[] sort(int[] input) {
 	int k;
 	int len = input.length;
 	int maxDigit = maxDigits(input);
@@ -57,10 +65,8 @@ public class RadixSorter {
 		indices[dig]++;
 	    } // for each input number
 	    
-	    
 	    //flatten the output into one long array
 	    k = 0;
-	    
 	    for (int i = 0; i < 10; i++) {
 		for (int j = 0; j < indices[i]; j++) {
 		    input[k++] = table[i][j];
@@ -73,9 +79,9 @@ public class RadixSorter {
     public static void main(String[] args) {
 	//System.out.println("3d digit of 4635 is " + digitAt(2, 2));
 	int[] array = {14,2,3,42,586,6,79,82,9,Integer.MAX_VALUE, 0};
-
+	RadixSorter r = new RadixSorter();	
 	System.out.println(Arrays.toString(array));
-	System.out.println(Arrays.toString(radixSort(array)));
+	System.out.println(Arrays.toString(r.sort(array)));
     }
 
 }
